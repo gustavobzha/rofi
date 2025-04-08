@@ -28,8 +28,8 @@ fi
 TOGGLE="󰐎  Play/Pause"
 NEXT="󰼧  Next"
 PREV="󰼨  Previous"
-SEEKMINUS="󰁍  Go back 15 seconds"
-SEEKPLUS="󰁔  Go ahead 15 seconds"
+REWIND="󰁍  Go back 15 seconds"
+FASTFORWARD="󰁔  Go ahead 15 seconds"
 STATUS=""
 RETURN="󰌑  Return"
 
@@ -74,7 +74,7 @@ show_action_menu() {
         STATUS=$(get_player_status "$player")
         
         # Show menu
-        chosen=$(echo -e "$TOGGLE\n$NEXT\n$PREV\n$SEEKPLUS\n$SEEKMINUS\n$RETURN" | \
+        chosen=$(echo -e "$TOGGLE\n$NEXT\n$PREV\n$FASTFORWARD\n$REWIND\n$RETURN" | \
             rofi -dmenu -i -p "$player" -mesg "$STATUS" -theme "$theme" -format 's')
         
         # Exit if user pressed ESC or clicked outside
@@ -93,10 +93,10 @@ show_action_menu() {
             "$PREV")
                 playerctl -p "$player" previous
                 ;;
-            "$SEEKMINUS")
+            "$REWIND")
                 playerctl -p "$player" position 15-
                 ;;
-            "$SEEKPLUS")
+            "$FASTFORWARD")
                 playerctl -p "$player" position 15+
                 ;;
             "$RETURN")
